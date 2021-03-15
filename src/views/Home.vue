@@ -90,7 +90,8 @@ export default {
       }
     },
     mint () {
-      this.erc20Contract.methods.mint(this.userAddr, new BigNumber(100).times(1e18).toFiexd(0))
+      const amount = new BigNumber(100).times('1e18')
+      this.erc20Contract.methods.mint(this.userAddr, amount.toFixed(0))
         .send({ from: this.userAddr, gasLimit: 100000 })
         .on('transactionHash', (hash) => {
           this.isMintSuccess = false
@@ -102,7 +103,8 @@ export default {
         })
     },
     transfer () {
-      this.erc20Contract.methods.transfer(this.inputDestAddr, new BigNumber(this.inputAmount).times(1e18).toFiexd(0))
+      const amount = new BigNumber(this.inputAmount).times('1e18')
+      this.erc20Contract.methods.transfer(this.inputDestAddr, amount.toFixed(0))
         .send({ from: this.userAddr, gasLimit: 200000 })
         .on('transactionHash', (hash) => {
           this.isTransferSuccess = false
